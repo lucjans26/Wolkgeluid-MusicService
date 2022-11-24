@@ -26,4 +26,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: lucjans26/wolkgeluid-artistservice:latest
+          tags: lucjans26/wolkgeluid-musicservice:latest
