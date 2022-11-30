@@ -8,10 +8,12 @@
         "php": "^8.0.2",
         "academe/laravel-azure-file-storage-driver": "^1.0",
         "guzzlehttp/guzzle": "^7.2",
+        "jenssegers/mongodb": "^3.9",
         "kunalvarma05/laravel-rabbitmq": "^1.4",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "mongodb/mongodb": "^1.12"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model;
 
 class Song extends Model
 {
@@ -13,7 +13,7 @@ class Song extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'id',
+        '_id',
         'name',
         'album_id',
         'artist_id',
@@ -23,6 +23,7 @@ class Song extends Model
     ];
 
     protected $table = "song";
+    protected $connection = 'mongodb';
 
     /**
      * The attributes that should be hidden for serialization.
@@ -42,8 +43,5 @@ class Song extends Model
 
     ];
 
-    public function albums()
-    {
-        return $this->belongsTo(Album::class);
-    }
+    protected $primaryKey = '_id';
 }

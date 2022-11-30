@@ -8,7 +8,7 @@ ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/do
 
 # Install php extensions
 RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
-    install-php-extensions mbstring pdo_mysql zip exif pcntl gd memcached sockets
+    install-php-extensions mbstring pdo_mysql zip exif pcntl gd memcached sockets mongodb
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
@@ -49,6 +49,9 @@ RUN chmod -R ug+w /var/www/storage
 RUN cp docker/supervisord.conf /etc/supervisord.conf
 RUN cp docker/php.ini /usr/local/etc/php/conf.d/app.ini
 RUN cp docker/nginx.conf /etc/nginx/sites-enabled/default
+
+
+RUN service nginx reload
 
 # PHP Error Log Files
 RUN mkdir /var/log/php

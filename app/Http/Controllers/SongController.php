@@ -56,7 +56,7 @@ class SongController extends Controller
     public function deleteSong(Request $request)
     {
         $validateData = $request->validate([
-            'song_id' => 'required',
+            'song_id' => 'required|string',
             'pat' => 'required|string',
         ]);
 
@@ -78,7 +78,6 @@ class SongController extends Controller
             'song_id' => 'integer',
             'pat' => 'required|string',
         ]);
-
 
         if (AuthTrait::checkAbility(self::ABILITY, $validateData['pat']))
         {
