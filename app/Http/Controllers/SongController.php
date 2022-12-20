@@ -76,19 +76,33 @@ class SongController extends Controller
     {
         $validateData = $request->validate([
             'song_id' => 'integer',
-            'pat' => 'required|string',
+            'pat' => 'required',
         ]);
 
         if (AuthTrait::checkAbility(self::ABILITY, $validateData['pat']))
         {
-            $song = Song::find($validateData['song_id']);
-            if ($song)
+            if (isset($validateData['song_id']))
             {
-                $response = new ValidResponse($song);
-                return response()->json($response, 200);
+                $song = Song::find($validateData['song_id']);
+                if ($song)
+                {
+                    $response = new ValidResponse($song);
+                    return response()->json($response, 200);
+                }
+                $response = new InvalidResponse(ResponseStrings::NOT_FOUND);
+                return response()->json($response, 404);
             }
-            $response = new InvalidResponse(ResponseStrings::NOT_FOUND);
-            return response()->json($response, 404);
+            else
+            {
+                $songs = Song::all();
+                if ($songs)
+                {
+                    $response = new ValidResponse($songs);
+                    return response()->json($response, 200);
+                }
+                $response = new InvalidResponse(ResponseStrings::NOT_FOUND);
+                return response()->json($response, 404);
+            }
         }
         $response = new InvalidResponse(ResponseStrings::UNAUTHORIZED);
         return response()->json($response, 401);

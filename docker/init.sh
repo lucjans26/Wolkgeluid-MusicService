@@ -7,7 +7,7 @@
 
 cd /var/www
 
-php artisan migrate:fresh
+php artisan migrate
 php artisan cache:clear
 php artisan route:cache
 
