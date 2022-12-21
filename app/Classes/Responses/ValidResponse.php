@@ -6,7 +6,7 @@ class ValidResponse
 {
     public $result;
 
-    function __construct($_result)
+    public function __construct($_result)
     {
         $this->success = true;
         $this->result = $_result;

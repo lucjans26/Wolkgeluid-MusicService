@@ -28,7 +28,7 @@ class SongController extends Controller
 
         if (AuthTrait::checkAbility(self::ABILITY, $validateData['pat']))
         {
-            $path = Storage::disk('azure-file-storage')->put("" ,$request->file('song'));
+            $path = Storage::disk('azure-file-storage')->put("", $request->file('song'));
 
             $song = new Song([
                 'name' => $validateData['title'],
@@ -41,7 +41,7 @@ class SongController extends Controller
 
             $song->save();
 
-            if($song)
+            if ($song)
             {
                 $response = new ValidResponse($song);
                 return response()->json($response, 201);

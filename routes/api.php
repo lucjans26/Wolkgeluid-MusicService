@@ -15,12 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+const ROUTE = '/music';
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/music', [SongController::class, 'getSong']);
+Route::get(ROUTE, [SongController::class, 'getSong']);
 //Route::get('/music/search', [SongController::class, 'searchSong']);
-//Route::put(ALBUM_ROUTE, [SongController::class, 'updateAlbum'])->middleware(['auth:sanctum', 'abilities:music']);
-Route::delete('/music', [SongController::class, 'deleteSong']);
-Route::post('/music', [SongController::class, 'uploadSong']);
+Route::delete(ROUTE, [SongController::class, 'deleteSong']);
+Route::post(ROUTE, [SongController::class, 'uploadSong']);

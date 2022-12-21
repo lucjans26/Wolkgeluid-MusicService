@@ -62,7 +62,7 @@ class RabbitUserConsumer extends Command
         );
 
         $routingKey = 'user';
-        $queue = new RabbitMQQueue('music_queue',  ['declare' => true]);
+        $queue = new RabbitMQQueue('music_queue', ['declare' => true]);
         $exchange = new RabbitMQExchange($this->option('exchange') ?? '', ['declare' => true]);
 
         $messageConsumer
