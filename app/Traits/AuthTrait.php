@@ -8,10 +8,12 @@ use App\Classes\Responses\ResponseStrings;
 use App\Classes\Responses\ValidResponse;
 use App\Models\Album;
 use App\Models\Artist;
+use App\Models\Song;
 use App\Models\Token;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Kunnu\RabbitMQ\RabbitMQExchange;
 use Kunnu\RabbitMQ\RabbitMQMessage;
 
@@ -59,5 +61,18 @@ trait AuthTrait
             }
         }
         return false;
+    }
+
+    public static function deleteSongs($artists)
+    {
+        foreach ($artists as $artist)
+        {
+            $songs = Song::where('artist_id', $artist->id)->get();
+            foreach ($songs as $song)
+            {
+                Storage::disk('azure-file-storage')->delete($song->path);
+                $song->delete();
+            }
+        }
     }
 }
